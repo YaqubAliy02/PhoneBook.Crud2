@@ -9,6 +9,5 @@ namespace PhoneBook.Crud2
             Console.WriteLine("Hello, World!");
         }
     }
-
 }
 
