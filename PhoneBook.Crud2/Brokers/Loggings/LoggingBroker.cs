@@ -1,5 +1,5 @@
 ﻿using System;
-namespace PhoneBook.Crud2.Brokers
+namespace PhoneBook.Crud2.Brokers.Loggings
 {
     internal class LoggingBroker : ILoggingBroker
     {
