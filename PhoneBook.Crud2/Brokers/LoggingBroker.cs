@@ -1,6 +1,4 @@
 ﻿using System;
-
-
 namespace PhoneBook.Crud2.Brokers
 {
     internal class LoggingBroker : ILoggingBroker
@@ -13,6 +11,5 @@ namespace PhoneBook.Crud2.Brokers
             Console.WriteLine(exception.Message);
             Console.ResetColor();
         }
-
     }
 }
