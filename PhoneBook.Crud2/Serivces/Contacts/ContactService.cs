@@ -2,7 +2,6 @@
 using PhoneBook.Crud2.Brokers.Loggings.Storages;
 using PhoneBook.Crud2.Models;
 using System;
-
 namespace PhoneBook.Crud2.Serivces.Contacts
 {
     internal class ContactService : IContactService
@@ -14,7 +13,6 @@ namespace PhoneBook.Crud2.Serivces.Contacts
             this.storageBroker = new FileStorageBroker();
             this.loggingBroker = new LoggingBroker();
         }
-        // happy path
         public Contact AddContact(Contact contact)
         {
             return contact is null
@@ -36,7 +34,6 @@ namespace PhoneBook.Crud2.Serivces.Contacts
             this.loggingBroker.LogError("Contact is invalid");
             return new Contact();
         }
-
         private Contact ValidateAndAddContact(Contact contact)
         {
             if(contact.Id is 0 

@@ -5,7 +5,6 @@ namespace PhoneBook.Crud2.Brokers.Loggings
     {
         public void LogInforamation(string message) =>
             Console.WriteLine(message);
-
         public void LogError(string userMessage)
         {
             Console.ForegroundColor = ConsoleColor.Red;

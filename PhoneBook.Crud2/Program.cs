@@ -1,7 +1,5 @@
 ﻿using PhoneBook.Crud2.Models;
 using PhoneBook.Crud2.Serivces.Contacts;
-using System;
-
 namespace PhoneBook.Crud2
 {
     internal class Program

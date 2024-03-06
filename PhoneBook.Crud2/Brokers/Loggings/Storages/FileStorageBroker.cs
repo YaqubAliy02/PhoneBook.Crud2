@@ -1,7 +1,6 @@
 ﻿using PhoneBook.Crud2.Models;
 using System;
 using System.IO;
-
 namespace PhoneBook.Crud2.Brokers.Loggings.Storages
 {
     internal class FileStorageBroker : IStorageBroker
@@ -11,13 +10,13 @@ namespace PhoneBook.Crud2.Brokers.Loggings.Storages
         {
             EnsureFileExists();
         }
+
         public Contact AddContact(Contact contact)
         {
             string contactLine = $"{contact.Id}* {contact.Name}*{contact.Phone}\n";
 
             File.AppendAllText(FILEPATH, contactLine);
             return contact;
-
         }
 
         public Contact[] ReadAllContact()
@@ -50,7 +49,6 @@ namespace PhoneBook.Crud2.Brokers.Loggings.Storages
             {
                 File.Create(FILEPATH).Close();
             }
-        }
-           
+        }  
     }
 }
