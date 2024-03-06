@@ -1,4 +1,5 @@
 ﻿using PhoneBook.Crud2.Models;
+using System;
 using System.IO;
 
 namespace PhoneBook.Crud2.Brokers.Loggings.Storages
@@ -18,6 +19,29 @@ namespace PhoneBook.Crud2.Brokers.Loggings.Storages
             return contact;
 
         }
+
+        public Contact[] ReadAllContact()
+        {
+            string[] contactLines = File.ReadAllLines(FILEPATH);
+            int contactLenth = contactLines.Length;
+            Contact[] contacts = new Contact[contactLenth];
+
+            for(int iteration = 0; iteration < contactLenth; iteration++)
+            {
+                string contactLine = contactLines[iteration];
+                string[] contactProperties = contactLine.Split("*");
+
+                Contact contact = new Contact
+                {
+                    Id = Convert.ToInt32(contactProperties[0]),
+                    Name = contactProperties[1],
+                    Phone = contactProperties[2]
+                };
+                contacts[iteration] = contact;
+            }
+            return contacts;
+        }
+
         private void EnsureFileExists()
         {
             bool fileExists = File.Exists(FILEPATH);
