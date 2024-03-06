@@ -13,12 +13,16 @@ namespace PhoneBook.Crud2.Serivces.Contacts
             this.storageBroker = new FileStorageBroker();
             this.loggingBroker = new LoggingBroker();
         }
+  
         public Contact AddContact(Contact contact)
         {
             return contact is null
                 ? CreateAndLogInvalidContact()
                 : ValidateAndAddContact(contact);
         }
+
+     
+
         public void ShowContacts()
         {
             Contact[] contacts = this.storageBroker.ReadAllContact();
@@ -29,6 +33,7 @@ namespace PhoneBook.Crud2.Serivces.Contacts
             }
             this.loggingBroker.LogInforamation("===End of contacts");
         }
+
         private Contact CreateAndLogInvalidContact()
         {
             this.loggingBroker.LogError("Contact is invalid");
@@ -47,6 +52,21 @@ namespace PhoneBook.Crud2.Serivces.Contacts
             {
                 return this.storageBroker.AddContact(contact);
             }
+        }
+
+        public void DeleteContact( int id)
+        {
+            Contact[] contacts = this.storageBroker.ReadAllContact();
+            for (int i = 0; i < contacts.Length; i++)
+            {
+                if (contacts[i] != null && contacts[i].Id == id)
+                {
+                    contacts[i] = null;
+                    this.loggingBroker.LogInforamation($"PhoneBook with ID {id} deleted successfully.");
+                    return;
+                }
+            }
+            this.loggingBroker.LogError($"PhoneBook with ID {id} not found.");
         }
     }
 }
