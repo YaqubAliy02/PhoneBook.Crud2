@@ -4,6 +4,6 @@ namespace PhoneBook.Crud2.Serivces.Contacts
     internal interface IContactService
     {
        Contact AddContact(Contact contact);
-        void ShowContacts();
+        void ShowContacts(Contact contact);
     }
 }

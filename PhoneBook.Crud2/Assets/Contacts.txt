@@ -1,1 +1,6 @@
-1* YaqubAliy Majamolov*2345678
+
+1* YaqubAliy*98765432
+2* YaqubAliy*234567
+5* Majamolov*12345678
+4* fds*54
+3* gds*345
