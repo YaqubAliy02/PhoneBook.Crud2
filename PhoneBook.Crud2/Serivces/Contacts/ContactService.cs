@@ -1,5 +1,5 @@
 ﻿using PhoneBook.Crud2.Brokers.Loggings;
-using PhoneBook.Crud2.Brokers.Loggings.Storages;
+using PhoneBook.Crud2.Brokers.Storages;
 using PhoneBook.Crud2.Models;
 using System;
 namespace PhoneBook.Crud2.Serivces.Contacts
@@ -67,6 +67,27 @@ namespace PhoneBook.Crud2.Serivces.Contacts
                 }
             }
             this.loggingBroker.LogError($"PhoneBook with ID {id} not found.");
+        }
+
+        public void Update(Contact contact)
+        {
+            if (contact is null)
+            {
+                this.loggingBroker.LogError("Your contact is empty");
+                return;
+            }
+
+            if (contact.Id == 0 || String.IsNullOrEmpty(contact.Name) || String.IsNullOrEmpty(contact.Phone))
+            {
+                this.loggingBroker.LogError("Your contact is invalid");
+            }
+
+            this.storageBroker.UpdateContact(contact);
+        }
+
+        public void Delete(int id)
+        {
+            this.storageBroker.DeleteContact(id);
         }
     }
 }
