@@ -15,7 +15,7 @@ namespace PhoneBook.Crud2
                 Name = "YaqubAliy Majamolov",
                 Phone = "2345678"
             };
-            contactService.AddContact(contact);
+            contactService.AddContact(null);
         }
     }
 }

@@ -13,12 +13,20 @@ namespace PhoneBook.Crud2.Serivces.Contacts
         {
             this.storageBroker = new FileStorageBroker();
             this.loggingBroker = new LoggingBroker();
-
+        }
+        // happy path
+        public Contact AddContact(Contact contact)
+        {
+            return contact is null
+                ? CreateAndLogInvalidContact()
+                : this.storageBroker.AddContact(contact);
         }
 
-        // happy path
-        public Contact AddContact(Contact contact) =>
-          this.storageBroker.AddContact(contact);
+        private Contact CreateAndLogInvalidContact()
+        {
+            this.loggingBroker.LogError("Contact is invalid");
+            return new Contact();
+        }
 
         public void ShowContacts()
         {
@@ -30,5 +38,7 @@ namespace PhoneBook.Crud2.Serivces.Contacts
             }
             this.loggingBroker.LogInforamation("===End of contacts");
         }
+
     }
 }
+
