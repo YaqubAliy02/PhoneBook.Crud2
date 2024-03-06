@@ -1,6 +1,2 @@
-
-1* YaqubAliy*98765432
-2* YaqubAliy*234567
-5* Majamolov*12345678
-4* fds*54
-3* gds*345
+1*Yaqub*345
+4*fsdf*3

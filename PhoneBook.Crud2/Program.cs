@@ -40,7 +40,7 @@ namespace PhoneBook.Crud2
                     case "2":
                         Console.Clear();
                         Contact contact2 = new Contact();
-                        contactService.ShowContacts(contact2);
+                        contactService.ShowContacts();
                         break;
 
                     case "3":
@@ -49,7 +49,7 @@ namespace PhoneBook.Crud2
                         Console.Write("Enter id:");
                         string deleteWithIdStr = Console.ReadLine();
                         int deleteWithId = Convert.ToInt32(deleteWithIdStr);
-
+                        contactService.DeleteContact(deleteWithId);
                         break;
 
                     case "4":

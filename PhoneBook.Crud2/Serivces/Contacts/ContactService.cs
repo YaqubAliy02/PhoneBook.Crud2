@@ -13,18 +13,27 @@ namespace PhoneBook.Crud2.Serivces.Contacts
             this.storageBroker = new FileStorageBroker();
             this.loggingBroker = new LoggingBroker();
         }
+  
         public Contact AddContact(Contact contact)
         {
             return contact is null
                 ? CreateAndLogInvalidContact()
                 : ValidateAndAddContact(contact);
         }
-        public void ShowContacts(Contact contact)
+
+     
+
+        public void ShowContacts()
         {
             Contact[] contacts = this.storageBroker.ReadAllContact();
 
-             DisplayAndLogInvalidContact(contacts, contact);
+            foreach (Contact contact in contacts)
+            {
+                this.loggingBroker.LogInforamation($"{contact.Id}, {contact.Name} - {contact.Phone}");
+            }
+            this.loggingBroker.LogInforamation("===End of contacts");
         }
+
         private Contact CreateAndLogInvalidContact()
         {
             this.loggingBroker.LogError("Contact is invalid");
@@ -44,27 +53,21 @@ namespace PhoneBook.Crud2.Serivces.Contacts
                 return this.storageBroker.AddContact(contact);
             }
         }
-        private void DisplayAndLogInvalidContact(Contact[] contacts, Contact contact2)
+
+        public void DeleteContact( int id)
         {
-            if (contact2.Id is 0
-              || String.IsNullOrWhiteSpace(contact2.Name)
-              || String.IsNullOrWhiteSpace(contact2.Phone))
+            Contact[] contacts = this.storageBroker.ReadAllContact();
+            for (int i = 0; i < contacts.Length; i++)
             {
-                this.loggingBroker.LogError("Contact is empty ");
-            }
-            else
-            {
-                foreach (Contact contact in contacts)
+                if (contacts[i] != null && contacts[i].Id == id)
                 {
-                    this.loggingBroker.LogInforamation($"{contact.Id}, {contact.Name} - {contact.Phone}");
+                    contacts[i] = null;
+                    this.loggingBroker.LogInforamation($"PhoneBook with ID {id} deleted successfully.");
+                    return;
                 }
-                this.loggingBroker.LogInforamation("===End of contacts");
             }
-
-          
+            this.loggingBroker.LogError($"PhoneBook with ID {id} not found.");
         }
-
-      
     }
 }
 

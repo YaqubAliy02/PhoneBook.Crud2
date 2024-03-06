@@ -5,6 +5,8 @@ namespace PhoneBook.Crud2.Brokers.Loggings.Storages
     internal interface IStorageBroker
     {
        Contact AddContact(Contact contact);
-        Contact[] ReadAllContact();
+       Contact[] ReadAllContact();
+        Contact DeleteContact(Contact contact);
+
     }
 }
