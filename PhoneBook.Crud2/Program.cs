@@ -1,58 +1,61 @@
 ﻿using PhoneBook.Crud2.Models;
 using PhoneBook.Crud2.Serivces.Contacts;
+using PhoneBook.Models;
+using PhoneBook.Services.Contacts;
 using System;
-namespace PhoneBook.Crud2
+class Program
 {
-    internal class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        IContactService contactService = new ContactService();
+        string userChoice;
+        do
         {
-            IContactService contactService = new ContactService();
-            bool process = true;
-            do
+            PrintMenu();
+            Console.Write("Enter your choice:");
+            userChoice = Console.ReadLine();
+
+            switch (userChoice)
             {
-                PrintMenu();
-
-                Console.Write("Enter your choice:");
-                string userChoice = Console.ReadLine();
-
-                switch (userChoice)
-                {
-                    case "1":
+                case "1":
+                    {
                         Console.Clear();
                         Contact contact = new Contact();
 
                         Console.Write("Enter id: ");
                         string userIdStr = Console.ReadLine();
                         int userId = Convert.ToInt32(userIdStr);
-                        contact.Id = userId; 
+                        contact.Id = userId;
 
                         Console.Write("Enter name: ");
                         string nameOfItem = Console.ReadLine();
                         contact.Name = nameOfItem;
-                        
+
                         Console.Write("Enter phoneNumber: ");
                         string phoneNumberOfItem = Console.ReadLine();
                         contact.Phone = phoneNumberOfItem;
                         contactService.AddContact(contact);
-                        break;
-
-                    case "2":
+                    }
+                    break;
+                case "2":
+                    {
                         Console.Clear();
-                        Contact contact2 = new Contact();
                         contactService.ShowContacts();
-                        break;
-
-                    case "3":
+                    }
+                    break;
+                case "3":
+                    {
                         Console.Clear();
                         Console.WriteLine("Enter an id which you want to delete");
                         Console.Write("Enter id:");
                         string deleteWithIdStr = Console.ReadLine();
                         int deleteWithId = Convert.ToInt32(deleteWithIdStr);
-                        contactService.DeleteContact(deleteWithId);
-                        break;
-
-                    case "4":
+                        contactService.Delete(deleteWithId);
+                    }
+                    break;
+                case "4":
+                    {
+                        Contact newContact = new Contact();
                         Console.Clear();
                         Console.WriteLine("Enter an id which you want  to edit");
                         Console.Write("Enter an id:");
@@ -62,35 +65,30 @@ namespace PhoneBook.Crud2
                         string name = Console.ReadLine();
                         Console.Write("Enter phoneNumber:");
                         string phoneNumber = Console.ReadLine();
+                        newContact.Id = id;
+                        newContact.Name = name;
+                        newContact.Phone = phoneNumber;
+                        contactService.Update(newContact);
+                    }
+                    break;
 
-                        break;                                
+                case "0": break;
 
-                    case "0":
-                        Console.Clear();
-                        if (userChoice == "0")
-                        {
-                            process = false;
-                            Console.WriteLine("Thank you for coming to our console app!!! '");
-                        }
-                        break;
-
-                    default:
-                        Console.WriteLine("You entered wrong input, Try again");
-                        break;
-                }
+                default:
+                    Console.WriteLine("You entered wrong input, Try again");
+                    break;
             }
-            while (process);
+        }
+        while (userChoice != "0");
 
-        }
-        public static void PrintMenu()
-        {
-            Console.WriteLine("1.Add phone books");
-            Console.WriteLine("2.Display phoneBooks");
-            Console.WriteLine("3.Delete phone book by id");
-            Console.WriteLine("4.Update by id");
-            Console.WriteLine("0.Exit");
-        }
+        Console.WriteLine("The app has been finished");
+    }
+    public static void PrintMenu()
+    {
+        Console.WriteLine("1.Add phone books");
+        Console.WriteLine("2.Display phoneBooks");
+        Console.WriteLine("3.Delete phone book by id");
+        Console.WriteLine("4.Update by id");
+        Console.WriteLine("0.Exit");
     }
 }
-
-
