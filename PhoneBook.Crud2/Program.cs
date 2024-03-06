@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PhoneBook.Crud2.Models;
+using PhoneBook.Crud2.Serivces.Contacts;
+using System;
 
 namespace PhoneBook.Crud2
 {
@@ -6,8 +8,16 @@ namespace PhoneBook.Crud2
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            IContactService contactService = new ContactService();
+            Contact contact = new Contact
+            {
+                Id = 1,
+                Name = "YaqubAliy Majamolov",
+                Phone = "2345678"
+            };
+            contactService.AddContact(contact);
         }
     }
+
 }
 
