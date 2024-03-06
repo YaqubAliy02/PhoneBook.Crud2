@@ -19,5 +19,16 @@ namespace PhoneBook.Crud2.Serivces.Contacts
         // happy path
         public Contact AddContact(Contact contact) =>
           this.storageBroker.AddContact(contact);
+
+        public void ShowContacts()
+        {
+            Contact[] contacts = this.storageBroker.ReadAllContact();
+
+            foreach (Contact contact in contacts)
+            {
+                this.loggingBroker.LogInforamation($"{contact.Id}, {contact.Name} - {contact.Phone}");
+            }
+            this.loggingBroker.LogInforamation("===End of contacts");
+        }
     }
 }

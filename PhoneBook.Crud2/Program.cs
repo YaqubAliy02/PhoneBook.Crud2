@@ -18,6 +18,5 @@ namespace PhoneBook.Crud2
             contactService.AddContact(contact);
         }
     }
-
 }
 
