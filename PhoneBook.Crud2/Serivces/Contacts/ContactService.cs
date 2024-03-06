@@ -19,15 +19,8 @@ namespace PhoneBook.Crud2.Serivces.Contacts
         {
             return contact is null
                 ? CreateAndLogInvalidContact()
-                : this.storageBroker.AddContact(contact);
+                : ValidateAndAddContact(contact);
         }
-
-        private Contact CreateAndLogInvalidContact()
-        {
-            this.loggingBroker.LogError("Contact is invalid");
-            return new Contact();
-        }
-
         public void ShowContacts()
         {
             Contact[] contacts = this.storageBroker.ReadAllContact();
@@ -38,7 +31,26 @@ namespace PhoneBook.Crud2.Serivces.Contacts
             }
             this.loggingBroker.LogInforamation("===End of contacts");
         }
+        private Contact CreateAndLogInvalidContact()
+        {
+            this.loggingBroker.LogError("Contact is invalid");
+            return new Contact();
+        }
 
+        private Contact ValidateAndAddContact(Contact contact)
+        {
+            if(contact.Id is 0 
+               || String.IsNullOrWhiteSpace(contact.Name)
+               || String.IsNullOrWhiteSpace(contact.Phone))
+            {
+                this.loggingBroker.LogError("Contact details missing.");
+                return new Contact();
+            }
+            else
+            {
+                return this.storageBroker.AddContact(contact);
+            }
+        }
     }
 }
 
