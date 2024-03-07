@@ -12,10 +12,8 @@ namespace PhoneBook.Crud2
             do
             {
                 PrintMenu();
-
                 Console.Write("Enter your choice:");
                  userChoice = Console.ReadLine();
-
                 switch (userChoice)
                 {
                     case "1":

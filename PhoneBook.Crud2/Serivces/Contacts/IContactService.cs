@@ -7,6 +7,5 @@ namespace PhoneBook.Crud2.Serivces.Contacts
         void ShowContacts();
         void Update(Contact contact);
         void Delete(int id);
-
     }
 }
